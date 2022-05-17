@@ -25,11 +25,13 @@ const register =asyncErrorWrapper( async (req,res,next)=>{
 });
 
 const login =asyncErrorWrapper(async (req,res,next)=>{
-    const{email,password}=req.body;
+    const {email,password}=req.body;
+    console.log(email,password);
     if(!validateUserInput(email,password)){
         return next(new CustomError("Please  check your inputs",400));
     }
     const user =await User.findOne({email}).select("+password");
+    console.log("abc");
 
     if(!comparePassword(password,user.password)){
         return next(new CustomError("Please check your credentials",400));
