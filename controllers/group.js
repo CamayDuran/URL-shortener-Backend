@@ -1,20 +1,19 @@
 const Group =require('../models/Group');
 const asyncErrorWrapper = require("express-async-handler");
-const {sendJwtToClient}=require("../helpers/authorization/tokenHelpers");
+
 
 const registergroup =asyncErrorWrapper( async (req,res,next)=>{
 
     //POST DATA
 
-   const {GroupName,Description,GroupLinks}=req.body;
+   const {GroupName,Description}=req.body;
 
         const group= await Group.create({
           GroupName,
-          Description,
-          GroupLinks
+          Description
         });
-   
-         sendJwtToClient(group,res);
+       console.log(group);
+        res.json(group);
 });
 
 const getAllGroup = asyncErrorWrapper(async (req,res,next)=>{

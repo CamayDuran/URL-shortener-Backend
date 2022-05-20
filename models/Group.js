@@ -7,10 +7,8 @@ const GroupSchema=new mongoose.Schema({
     },
     Description:{
         type:String
-    },
-    GroupLinks:{
-        type:String
     }
+   
 });
 
 module.exports=mongoose.model('Group',GroupSchema);

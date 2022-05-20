@@ -9,18 +9,19 @@ const sendEmail=require("../helpers/libraries/sendEmail");
 
 const register =asyncErrorWrapper( async (req,res,next)=>{
     //POST DATA
-        const {name, email, password, phone,role}=req.body;
-
+    
+        const {name, email, password, phone}=req.body;
+        console.log("test");
+        console.log(req.body);
         const user= await User.create({
             name,
             email,
             password,
-            phone,
-            role
+            phone
         });
    
          sendJwtToClient(user,res);
-   
+
   
 });
 
@@ -31,7 +32,6 @@ const login =asyncErrorWrapper(async (req,res,next)=>{
         return next(new CustomError("Please  check your inputs",400));
     }
     const user =await User.findOne({email}).select("+password");
-    console.log("abc");
 
     if(!comparePassword(password,user.password)){
         return next(new CustomError("Please check your credentials",400));
